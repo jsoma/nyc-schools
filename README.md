@@ -144,6 +144,8 @@ Notice how the function names - `def school` - and the variable name - `dbn` - b
 
 ## GitHub isn't updating
 
+Every time you make a change, you need to freeze again and commit/push to GitHub again.
+
 The biggest issue is **making sure you're freezing in the right directory**. If you have one directory where you're running your code and a different directory that's your GitHub repository, you're going to have to copy your code over again and again. You probably want to just have one place - the GitHub repo - where you're doing your freezing.
 
 ## Bootstrap
