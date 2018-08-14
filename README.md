@@ -120,7 +120,7 @@ It's nice easy with `.to_sql`. You can check out the Jupyter Notebook.
 
 * Name them appropriately (We had a `School`)
 * Dobule-check table name that `__tablename__` is pointing to
-* Make sure you have a primary key - it has to be a **unique field**. Ours was the column called `dbn`, so we used `dbn = db.Column(db.String, primary_key=True)`. If your dataset didn't originally have one, saving from pandas to SQL probably added one called `index`!
+* Make sure you have a primary key - it has to be a **unique field**. Ours was the column called `dbn`, so we used `dbn = db.Column(db.String, primary_key=True)`. If your dataset didn't originally have one, saving from pandas to SQL probably added one called `index`! If your key is an integer (like `index` is) you'll want to use `db.Integer` instead of `db.String`
 
 ## Freezing
 
