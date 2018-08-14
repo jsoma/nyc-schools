@@ -1,8 +1,8 @@
 # Flask web app how-to, steps and troubleshooting
 
-## Templates
+# Templates
 
-### Basic `app.py` template
+## Basic `app.py` template
 
 ```python
 from flask import Flask
@@ -17,7 +17,7 @@ if __name__ == '__main__':
 
 ```
 
-### Basic `freezer.py` template
+## Basic `freezer.py` template
 
 ```python
 from flask_frozen import Freezer
@@ -32,7 +32,7 @@ if __name__ == '__main__':
     freezer.freeze()
 ```
 
-### Very basic HTML templates
+## Very basic HTML templates
 
 These do NOT use any variables, but they do use `layout.html`. You should probably fill `layout.html` in with what we did in class, just steal it from the `templates` folder.
 
@@ -68,7 +68,7 @@ These do NOT use any variables, but they do use `layout.html`. You should probab
 <p>This is your footer</p>
 ```
 
-## Basic steps
+# Basic steps
 
 1. Start from the default Flask template up above, which you run with `python app.py`. It's a slightly edited version of the one from the [Flask site](http://flask.pocoo.org/).
 1. Add your routes and pages with fake data. Your `html` goes in `templates/`.
@@ -79,35 +79,35 @@ These do NOT use any variables, but they do use `layout.html`. You should probab
 1. Freeze your app with `python freezer.py`
 1. Upload to GitHub
 
-## Flask stuff
+# Flask stuff
 
-### Figure out what your routes should be
+## Figure out what your routes should be
 
 Make sure they all end in `/` so they'll be frozen correctly!
 
-### Flask error: `view function mapping is overwriting an existing endpoint function`
+## Flask error: `view function mapping is overwriting an existing endpoint function`
 
 Make sure all route endpoints have **different function names**. For example, if we have two `def schools` we'll get an error. Function names actually don't matter, you can name when whatever you want, as long as they're different.
 
-### Double-check your HTML links
+## Double-check your HTML links
 
 Your links should **end** in `/`, just like your routes, but they should also **not start with `/`**. For example, we used `<a href="schools/{{ school.dbn }}/">` to link to our school.
 
-## SQLAlchemy stuff
+# SQLAlchemy stuff
 
-### Convert your CSV file to a SQLite database
+## Convert your CSV file to a SQLite database
 
 It's nice easy with `.to_sql`. You can check out the Jupyter Notebook.
 
-### Build your models
+## Build your models
 
 * Name them appropriately (We had a `School`)
 * Dobule-check table name that `__tablename__` is pointing to
 * Make sure you have a primary key - it has to be a **unique field**. Ours was the column called `dbn`, so we used `dbn = db.Column(db.String, primary_key=True)`.
 
-## Freezing
+# Freezing
 
-### Freezing error: `Did you forget a URL generator?`
+## Freezing error: `Did you forget a URL generator?`
 
 When we have a route like `"/schools/<dbn>/"` we need to tell Frozen Flask what all possible values of `dbn` might be. We do this with a URL generator, like this:
 
@@ -120,7 +120,7 @@ def school():
 
 It grabs all of the schools and loops through the dbs. See the next error for a little more info!
 
-### Freezing error: `Could not build url for endpoint`
+## Freezing error: `Could not build url for endpoint`
 
 Make sure the function names in `freezer.py`  match the names in `app.py`.  For example, in `app.py` we have...
 
@@ -142,19 +142,19 @@ def school():
 
 Notice how the function names - `def school` - and the variable name - `dbn` - both match.
 
-## GitHub isn't updating
+# GitHub isn't updating
 
 Every time you make a change, you need to freeze again and commit/push to GitHub again.
 
 The biggest issue is **making sure you're freezing in the right directory**. If you have one directory where you're running your code and a different directory that's your GitHub repository, you're going to have to copy your code over again and again. You probably want to just have one place - the GitHub repo - where you're doing your freezing.
 
-## Bootstrap
+# Bootstrap
 
 * Be sure to update the `href` values in your navbar
 * Maybe delete the search bar, too!
 * Play around with Bootstrap. [Look at all these components!](https://getbootstrap.com/docs/4.1/components/alerts/) All you have to do is cut and paste!
 
-## Advanced: Relating tables to each other
+# Advanced: Relating tables to each other
 
 If you have two tables that are related to each other - for example, `schools` with a lot of `sat_scores`, and each school has `dbn` and each sat score has a `dbn` that says which school it's related to...
 
