@@ -1,0 +1,52 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<div class="jumbotron">
+  <h1 class="display-4">{{ school.school_name }}</h1>
+  <p class="lead">{{ school.primary_address_line_1 }}, {{ school.city }}, {{ school.state_code }} {{ school.zip }}</p>
+</div>
+
+
+<div class="row mb-5">
+  <div class="col-5">
+    <h3>Contact info</h3>
+    <p>Phone number: {{ school.phone_number }}</p>
+    <p>Fax number: {{ school.fax_number }}</p>
+    <p>School email: {{ school.school_email }}</p>
+    <p><a class="btn btn-warning">Email us</a></p>
+  </div>
+  <div class="col-7">
+
+ <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
+   integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+   crossorigin=""/>
+ <!-- Make sure you put this AFTER Leaflet's CSS -->
+ <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+   integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+   crossorigin=""></script>
+ <div id="mapid"></div>
+  <style>
+  #mapid { height: 400px; }
+  </style>
+<script>
+  var map = L.map('mapid').setView([{{ school.latitude }}, {{ school.longitude}}], 11);
+
+L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}', {
+  attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+  subdomains: 'abcd',
+  minZoom: 1,
+  maxZoom: 16,
+  ext: 'png'
+}).addTo(map)
+
+var marker = L.marker([{{ school.latitude }}, {{ school.longitude }}]).addTo(map);
+marker.bindPopup("{{ school.school_name }}").openPopup();
+</script>
+
+
+    This is another column
+  </div>
+</div>
+
+{% endblock %}

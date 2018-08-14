@@ -1,0 +1,21 @@
+Ruby on Rails
+Ruby = language, like Python
+Rails = framework
+  "web application framework"
+
+
+library = some code someone wrote that might be useful
+framework = really big library?
+
+CRUD websites
+- X Create
+- Read
+- X Update
+- X Delete
+
+Python - Django
+Flask
+
+
+
+
