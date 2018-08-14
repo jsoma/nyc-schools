@@ -89,9 +89,26 @@ Make sure they all end in `/` so they'll be frozen correctly!
 
 Make sure all route endpoints have **different function names**. For example, if we have two `def schools` we'll get an error. Function names actually don't matter, you can name when whatever you want, as long as they're different.
 
-### Double-check your HTML links
+### Don't use HTML links
 
-Your links should **end** in `/`, just like your routes, but they should also **not start with `/`**. For example, we used `<a href="schools/{{ school.dbn }}/">` to link to our school.
+We did `<a href="schools/{{ school.dbn }}/">` which is **stupid and you should never do it**. Flask can do cooler stuff now!
+
+In our `app.py`, we have a function called `school` that wants a `dbn`.
+
+```python
+@app.route("/schools/<dbn>/")
+def school(dbn):
+  school = School.query.filter_by(dbn=dbn).first()
+  return render_template("show.html", school=school)
+```
+
+In order to build a link to that spot from anywhere, we'll use the `url_for` helper in our template.
+
+```html
+<li><a href="{{ url_for('school', dbn=school.dbn) }}">{{ school.school_name }}</a></li>
+```
+
+Sorry I didn't talk about it in class! I'd somehow always avoided needing it.
 
 ## SQLAlchemy stuff
 
