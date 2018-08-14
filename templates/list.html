@@ -4,7 +4,7 @@
   <p>This will be a list of schools</p>
   <ul>
     {% for school in schools %}
-      <li><a href="/schools/{{ school.dbn }}">{{ school.school_name }}</a></li>
+      <li><a href="schools/{{ school.dbn }}">{{ school.school_name }}</a></li>
     {% endfor %}
   </ul>
 {% endblock %}
