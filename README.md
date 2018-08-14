@@ -171,7 +171,22 @@ The biggest issue is **making sure you're freezing in the right directory**. If 
 * Maybe delete the search bar, too!
 * Play around with Bootstrap. [Look at all these components!](https://getbootstrap.com/docs/4.1/components/alerts/) All you have to do is cut and paste!
 
-## Advanced: Relating tables to each other
+## Advanced
+
+### Searching doesn't exist
+
+You can't search on a static site (well... not really), but you could always have "everything that starts with A" and "everything that starts with B," etc.
+
+```python
+@app.route("/by_letter/<letter>/")
+def by_letter(letter):
+  school = School.query.filter(School.school_name.startswith(letter)).all()
+  return render_template("list.html", schools=schools)
+```
+
+That will filter for every school name that starts with whatever is in the URL, and then you'd just freeze with `A`, `B`, `C`, etc.
+
+### Relating tables to each other
 
 If you have two tables that are related to each other - for example, `schools` with a lot of `sat_scores`, and each school has `dbn` and each sat score has a `dbn` that says which school it's related to...
 
